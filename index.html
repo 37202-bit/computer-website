@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="เรียนรู้หลักการทำงานของคอมพิวเตอร์ — Hardware, Software, IPO Model สำหรับนักเรียนระดับมัธยมศึกษา" />
+  <title>หลักการทำงานของคอมพิวเตอร์</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════════════════════════ -->
+<div id="loading-screen">
+  <div class="loader-wrap">
+    <div class="loader-ring"></div>
+    <div class="loader-inner"></div>
+  </div>
+  <p class="loader-text">กำลังโหลด…</p>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- Background layers -->
+<canvas id="circuit-canvas"></canvas>
+<div id="particles"></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     MAIN WRAPPER
+════════════════════════════════════════════════════════════ -->
+<div id="main-wrapper">
+
+  <!-- ── NAVBAR ──────────────────────────────────────────── -->
+  <nav id="navbar" role="navigation" aria-label="เมนูหลัก">
+    <a href="#hero" class="nav-brand">
+      <span class="nav-brand-icon">💻</span>
+      <span>ComputerSci</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#hero"         class="nav-link active">หน้าแรก</a></li>
+      <li><a href="#components"   class="nav-link">องค์ประกอบ</a></li>
+      <li><a href="#how-it-works" class="nav-link">หลักการทำงาน</a></li>
+      <li><a href="#summary"      class="nav-link">สรุปตาราง</a></li>
+      <li><a href="#quiz-section" class="nav-link">Quiz</a></li>
+      <li><a href="#author"       class="nav-link">ผู้จัดทำ</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="เปิด/ปิดเมนู" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <ul class="nav-drawer" id="nav-drawer" role="list">
+    <li><a href="#hero"         class="nav-link">🏠 หน้าแรก</a></li>
+    <li><a href="#components"   class="nav-link">🖥️ องค์ประกอบ</a></li>
+    <li><a href="#how-it-works" class="nav-link">⚙️ หลักการทำงาน</a></li>
+    <li><a href="#summary"      class="nav-link">📊 สรุปตาราง</a></li>
+    <li><a href="#quiz-section" class="nav-link">🧠 Quiz</a></li>
+    <li><a href="#author"       class="nav-link">👤 ผู้จัดทำ</a></li>
+  </ul>
+
+  <!-- ══════════════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="หน้าแรก">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="hero-glow-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-badge">🔬 สื่อการเรียนรู้ มัธยมศึกษา</span>
+
+        <h1 class="hero-title">
+          <span class="line1">หลักการทำงาน</span><br/>
+          <span class="line2">ของคอมพิวเตอร์</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          สำรวจโลกของฮาร์ดแวร์ ซอฟต์แวร์ และกระบวนการทำงานของระบบคอมพิวเตอร์
+          ผ่านสื่อการเรียนรู้แบบอินเทอร์แอคทีฟที่ออกแบบมาเพื่อนักเรียนมัธยมศึกษา
+        </p>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-num">5</span>
+            <span class="hero-stat-label">หมวดหมู่</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">40+</span>
+            <span class="hero-stat-label">หัวข้อเนื้อหา</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">10</span>
+            <span class="hero-stat-label">ข้อ Quiz</span>
+          </div>
+        </div>
+
+        <div class="hero-btns">
+          <a href="#components" class="btn-primary ripple-btn">
+            🚀 เริ่มเรียนรู้
+          </a>
+          <a href="#how-it-works" class="btn-secondary">
+            📖 ดูเนื้อหา
+          </a>
+        </div>
+      </div>
+
+      <!-- CPU Illustration -->
+      <div class="hero-visual floating">
+        <div class="cpu-svg-wrap">
+          <div class="cpu-core">
+            <!-- Pins top -->
+            <div class="cpu-pins">
+              <div class="pin" style="top:12px;left:30px;"></div>
+              <div class="pin" style="top:12px;left:80px;"></div>
+              <div class="pin" style="top:12px;left:130px;"></div>
+              <div class="pin" style="top:12px;left:180px;"></div>
+              <!-- Pins bottom -->
+              <div class="pin" style="bottom:12px;left:30px;transform:scaleX(-1);"></div>
+              <div class="pin" style="bottom:12px;left:80px;transform:scaleX(-1);"></div>
+              <div class="pin" style="bottom:12px;left:130px;transform:scaleX(-1);"></div>
+              <div class="pin" style="bottom:12px;left:180px;transform:scaleX(-1);"></div>
+              <!-- Pins left -->
+              <div class="pin" style="top:50px;left:4px;transform:rotate(90deg);"></div>
+              <div class="pin" style="top:110px;left:4px;transform:rotate(90deg);"></div>
+              <div class="pin" style="top:170px;left:4px;transform:rotate(90deg);"></div>
+              <!-- Pins right -->
+              <div class="pin" style="top:50px;right:4px;transform:rotate(-90deg);"></div>
+              <div class="pin" style="top:110px;right:4px;transform:rotate(-90deg);"></div>
+              <div class="pin" style="top:170px;right:4px;transform:rotate(-90deg);"></div>
+            </div>
+
+            <!-- Orbit rings -->
+            <div class="orbit-ring orbit-ring-1">
+              <div class="orbit-dot"></div>
+              <div class="orbit-dot orbit-dot-2"></div>
+            </div>
+            <div class="orbit-ring orbit-ring-2"></div>
+
+            <!-- Center chip -->
+            <div class="cpu-center">
+              <span class="cpu-label">PROCESSOR</span>
+              <span class="cpu-icon">🔲</span>
+              <span class="cpu-label">64-BIT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 1: COMPONENTS
+  ══════════════════════════════════════════════════════════ -->
+  <section id="components" class="section-full">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">ส่วนที่ 1</span>
+        <h2 class="section-title">องค์ประกอบของระบบคอมพิวเตอร์</h2>
+        <p class="section-desc">ระบบคอมพิวเตอร์ประกอบด้วย 2 ส่วนหลัก ได้แก่ ฮาร์ดแวร์ (Hardware) และซอฟต์แวร์ (Software) ซึ่งทำงานร่วมกันอย่างสมดุลเพื่อให้คอมพิวเตอร์ทำงานได้อย่างมีประสิทธิภาพ</p>
+        <div class="section-divider"></div>
+      </header>
+
+      <!-- Tabs -->
+      <div class="hardware-software-tabs reveal">
+        <button class="tab-btn active" data-tab="tab-hardware">🔧 Hardware (ฮาร์ดแวร์)</button>
+        <button class="tab-btn" data-tab="tab-software">💾 Software (ซอฟต์แวร์)</button>
+      </div>
+
+      <!-- ── TAB: HARDWARE ── -->
+      <div class="tab-content active" id="tab-hardware">
+
+        <!-- Intro -->
+        <div class="glass-card reveal" style="padding:28px;margin-bottom:48px;">
+          <h3 style="font-size:1.1rem;color:var(--cyan-neon);margin-bottom:12px;">💻 ฮาร์ดแวร์ (Hardware) คืออะไร?</h3>
+          <p style="color:var(--text-secondary);line-height:1.8;">
+            ฮาร์ดแวร์ (Hardware) หมายถึง ส่วนประกอบทางกายภาพของคอมพิวเตอร์ที่สามารถมองเห็นและจับต้องได้จริง ประกอบไปด้วยอุปกรณ์อิเล็กทรอนิกส์ วงจร สายเคเบิล และชิ้นส่วนกลไกต่าง ๆ ที่ทำงานร่วมกัน ฮาร์ดแวร์แบ่งออกเป็น 5 กลุ่มหลักตามหน้าที่ ได้แก่ อุปกรณ์รับเข้า (Input) หน่วยประมวลผล (Processing) หน่วยความจำหลัก (Main Memory) อุปกรณ์จัดเก็บข้อมูล (Storage) และอุปกรณ์แสดงผล (Output) การทำงานของฮาร์ดแวร์ทุกชิ้นจะต้องอาศัยซอฟต์แวร์เป็นตัวสั่งการเพื่อให้คอมพิวเตอร์สามารถทำงานได้ตามวัตถุประสงค์ที่ต้องการ
+          </p>
+        </div>
+
+        <!-- 1.1 INPUT DEVICES -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">📥 1.1 อุปกรณ์รับเข้า (Input Devices)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            อุปกรณ์รับเข้า คืออุปกรณ์ที่ใช้ในการนำข้อมูลหรือคำสั่งจากผู้ใช้งานเข้าสู่ระบบคอมพิวเตอร์ เพื่อให้คอมพิวเตอร์นำไปประมวลผลต่อไป ข้อมูลที่รับเข้าอาจอยู่ในรูปแบบตัวอักษร ตัวเลข ภาพ เสียง หรือการเคลื่อนไหว
+          </p>
+          <div class="device-grid">
+
+            <!-- Keyboard -->
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">⌨️</div>
+              <div class="device-name">Keyboard</div>
+              <div class="device-role">แป้นพิมพ์</div>
+              <div class="device-desc">
+                แป้นพิมพ์เป็นอุปกรณ์รับข้อมูลเข้าหลักที่ใช้กันแพร่หลายที่สุด ประกอบด้วยปุ่มอักขระภาษาอังกฤษ ตัวเลข สัญลักษณ์พิเศษ และปุ่มฟังก์ชัน เมื่อกดปุ่ม วงจรอิเล็กทรอนิกส์ภายในจะสร้างสัญญาณดิจิทัลส่งไปยัง CPU
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> เมื่อกดปุ่ม สวิตช์ใต้ปุ่มจะปิดวงจรไฟฟ้า ไมโครคอนโทรลเลอร์ในแป้นพิมพ์จะแปลงสัญญาณเป็นรหัส ASCII หรือ Unicode แล้วส่งผ่านสาย USB หรือ Bluetooth ไปยังคอมพิวเตอร์<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> พิมพ์รายงาน ส่งข้อความ กรอกข้อมูล ลัดคีย์บอร์ดในโปรแกรม เล่นเกม และกรอกรหัสผ่าน ปัจจุบันมีแป้นพิมพ์แบบ Mechanical ที่ให้ความรู้สึกกดชัดเจน และแบบ Membrane ที่เงียบและราคาถูกกว่า
+              </div>
+            </div>
+
+            <!-- Mouse -->
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">🖱️</div>
+              <div class="device-name">Mouse</div>
+              <div class="device-role">เมาส์ / อุปกรณ์ชี้ตำแหน่ง</div>
+              <div class="device-desc">
+                เมาส์เป็นอุปกรณ์ควบคุมตำแหน่งของเคอร์เซอร์บนหน้าจอ โดยการเลื่อนเมาส์บนพื้นผิว เมาส์แบบ Optical ใช้แสง LED และกล้องจิ๋วในการตรวจจับการเคลื่อนไหวแทนลูกบอลแบบเก่า
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> เซ็นเซอร์ Optical ภายในเมาส์ฉายแสงไปที่พื้นผิวและถ่ายภาพอย่างต่อเนื่อง วิเคราะห์รูปแบบแสงที่สะท้อนกลับมาเพื่อคำนวณทิศทางและความเร็วของการเคลื่อนไหว<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> คลิกเลือกไฟล์, ลากและวางวัตถุ, วาดภาพในโปรแกรม Photoshop, เลื่อนหน้าเว็บ, คลิกขวาเพื่อเปิดเมนู เมาส์ Gaming มักมีอัตรา DPI สูง ทำให้ควบคุมได้แม่นยำยิ่งขึ้น
+              </div>
+            </div>
+
+            <!-- Scanner -->
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🖨️</div>
+              <div class="device-name">Scanner</div>
+              <div class="device-role">เครื่องสแกนเนอร์</div>
+              <div class="device-desc">
+                สแกนเนอร์ทำหน้าที่แปลงเอกสาร รูปภาพ หรือวัตถุ 2 มิติให้กลายเป็นข้อมูลดิจิทัลที่คอมพิวเตอร์สามารถจัดเก็บและประมวลผลได้ ใช้หลักการฉายแสงและตรวจจับแสงสะท้อนผ่านอุปกรณ์ CCD
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> หัวสแกนเคลื่อนที่ไปตามเอกสาร ฉายแสงสีขาวลงบนพื้นผิว แสงสะท้อนกลับถูกรับโดยเซ็นเซอร์ CCD (Charge-Coupled Device) แปลงเป็นสัญญาณไฟฟ้า แล้วส่งเป็นข้อมูลดิจิทัล<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> สแกนเอกสารราชการ แปลงเอกสารกระดาษเป็น PDF ด้วย OCR สแกนรูปถ่ายเก่าเก็บดิจิทัล สแกนสัญญาธุรกิจ ปัจจุบันสมาร์ทโฟนสามารถสแกนเอกสารผ่านแอปแทนสแกนเนอร์ตั้งโต๊ะได้
+              </div>
+            </div>
+
+            <!-- Webcam -->
+            <div class="glass-card device-card reveal delay-4">
+              <div class="device-icon-wrap">📷</div>
+              <div class="device-name">Webcam</div>
+              <div class="device-role">กล้องเว็บแคม</div>
+              <div class="device-desc">
+                เว็บแคมเป็นกล้องดิจิทัลที่ต่อเชื่อมกับคอมพิวเตอร์เพื่อบันทึกและส่งภาพวิดีโอแบบเรียลไทม์ผ่านอินเทอร์เน็ต ปัจจุบันมักฝังอยู่ในโน้ตบุ๊กและจอมอนิเตอร์ คุณภาพตั้งแต่ HD ไปจนถึง 4K
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> เซ็นเซอร์ภาพ CMOS รับแสงและแปลงเป็นข้อมูลดิจิทัล ชิปประมวลผลภายในจัดการบีบอัดวิดีโอและส่งข้อมูลผ่าน USB หรือสาย AV ไปยังคอมพิวเตอร์อย่างต่อเนื่อง<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> ประชุมออนไลน์ผ่าน Zoom/Teams, เรียนออนไลน์, สตรีมสด, บันทึกวิดีโอ vlog, ระบบรักษาความปลอดภัย CCTV และระบบจดจำใบหน้า (Face Recognition) เพื่อเข้าสู่ระบบ
+              </div>
+            </div>
+
+            <!-- Microphone -->
+            <div class="glass-card device-card reveal delay-5">
+              <div class="device-icon-wrap">🎤</div>
+              <div class="device-name">Microphone</div>
+              <div class="device-role">ไมโครโฟน</div>
+              <div class="device-desc">
+                ไมโครโฟนแปลงคลื่นเสียงในอากาศให้กลายเป็นสัญญาณไฟฟ้า จากนั้น ADC (Analog-to-Digital Converter) แปลงเป็นข้อมูลดิจิทัลที่คอมพิวเตอร์ประมวลผลได้ มีทั้งแบบคอนเดนเซอร์และไดนามิก
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> เมมเบรนบาง ๆ ในไมโครโฟนสั่นตามคลื่นเสียง การสั่นนี้สร้างความแตกต่างทางไฟฟ้าซึ่งถูกวัดและแปลงเป็นสัญญาณดิจิทัล ไมค์คอนเดนเซอร์ต้องการไฟ Phantom Power ให้เสียงคมชัดกว่า<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> บันทึกเสียงบรรยาย, ประชุมออนไลน์, ส่งคำสั่งเสียงให้ AI เช่น Siri หรือ Google Assistant, อัดพอดแคสต์, Streaming เกม, และใช้งานร่วมกับ Speech-to-Text เพื่อพิมพ์งานด้วยเสียง
+              </div>
+            </div>
+
+            <!-- Touchscreen -->
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">📱</div>
+              <div class="device-name">Touchscreen</div>
+              <div class="device-role">จอสัมผัส</div>
+              <div class="device-desc">
+                จอสัมผัสรวมหน้าที่ของ Input และ Output Device ไว้ด้วยกัน ผู้ใช้สามารถป้อนข้อมูลโดยตรงด้วยการแตะ ปัดนิ้ว หรือกดบนหน้าจอ ใช้เทคโนโลยี Capacitive ซึ่งตรวจจับกระแสไฟฟ้าจากนิ้วมนุษย์
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> หน้าจอ Capacitive Touchscreen เคลือบด้วยวัสดุนำไฟฟ้า เมื่อนิ้วสัมผัส จะรบกวนสนามไฟฟ้าที่จอปล่อยออกมา วงจรตรวจจับตำแหน่งและส่งพิกัด X, Y ไปประมวลผล<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่างการใช้งาน:</strong> สมาร์ทโฟน แท็บเล็ต คีออสก์บริการตัวเอง จอ ATM เครื่องสั่งอาหาร จอรถยนต์อัจฉริยะ และในงาน Art เช่น iPad + Apple Pencil สำหรับวาดภาพดิจิทัล
+              </div>
+            </div>
+
+          </div><!-- end device-grid -->
+        </div><!-- end input -->
+
+        <!-- 1.2 PROCESSING -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">⚙️ 1.2 หน่วยประมวลผล (Processing Devices)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            หน่วยประมวลผลเป็นศูนย์กลางของระบบคอมพิวเตอร์ ทำหน้าที่รับข้อมูลจาก Input เพื่อประมวลผลตามคำสั่งของโปรแกรม แล้วส่งผลลัพธ์ไปยัง Output หรือหน่วยความจำ
+          </p>
+          <div class="proc-grid">
+
+            <!-- CPU -->
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🔲</div>
+              <div class="device-name">CPU</div>
+              <div class="device-role">Central Processing Unit — หน่วยประมวลผลกลาง</div>
+              <div class="device-desc">
+                CPU คือ "สมอง" ของคอมพิวเตอร์ ทำหน้าที่อ่านคำสั่งจากโปรแกรม แปลความหมาย และดำเนินการประมวลผลทุกอย่าง ไม่ว่าจะเป็นการคำนวณตัวเลข การจัดการข้อมูล หรือการควบคุมอุปกรณ์ต่อพ่วง วัดความเร็วด้วยหน่วย GHz และจำนวน Core
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">องค์ประกอบหลัก:</strong> ประกอบด้วย Control Unit (CU) ควบคุมการทำงาน, Arithmetic Logic Unit (ALU) คำนวณตัวเลขและตรรกศาสตร์, Registers เก็บข้อมูลชั่วคราว และ Cache Memory ที่ความเร็วสูง<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Intel Core i9, AMD Ryzen 9, Apple M3 Pro มี CPU ทั้ง 4, 8, 16 Core ทำงานพร้อมกันได้หลายงาน ยิ่งมี Core มากและ Clock Speed สูง ยิ่งประมวลผลได้เร็ว
+              </div>
+            </div>
+
+            <!-- GPU -->
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">🎮</div>
+              <div class="device-name">GPU</div>
+              <div class="device-role">Graphics Processing Unit — หน่วยประมวลผลกราฟิก</div>
+              <div class="device-desc">
+                GPU เป็นชิปประมวลผลพิเศษที่ออกแบบมาเพื่อจัดการกราฟิกและภาพโดยเฉพาะ มีหน่วยประมวลผลขนาดเล็กหลายพันตัวทำงานพร้อมกัน (Parallel Processing) ทำให้เหมาะกับการเรนเดอร์ภาพ 3D วิดีโอ และ AI
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการทำงาน:</strong> GPU มี Shader Core หลายพันตัวทำงานพร้อมกันในแบบ Parallel ทำให้สามารถคำนวณพิกเซลของภาพ 3D ได้เร็วกว่า CPU มาก มีหน่วยความจำ VRAM แยกต่างหาก<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> NVIDIA RTX 4090, AMD Radeon RX 7900 ใช้ในเกม, การเรนเดอร์ 3D ใน Blender, เทรน AI Model ในงาน Deep Learning และ Cryptocurrency Mining
+              </div>
+            </div>
+
+            <!-- CU -->
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🎛️</div>
+              <div class="device-name">Control Unit (CU)</div>
+              <div class="device-role">หน่วยควบคุม</div>
+              <div class="device-desc">
+                Control Unit คือส่วนหนึ่งของ CPU ที่ทำหน้าที่ควบคุมและประสานงานการทำงานของส่วนประกอบต่าง ๆ ในคอมพิวเตอร์ อ่านคำสั่งจาก Memory แปลความหมาย และส่งสัญญาณควบคุมไปยัง ALU และหน่วยต่าง ๆ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หน้าที่:</strong> CU ดำเนินการตามวงจร Fetch → Decode → Execute กล่าวคือ ดึงคำสั่ง → ถอดรหัสคำสั่ง → สั่งให้ ALU หรือหน่วยอื่น ๆ ดำเนินการ ทำซ้ำหลายพันล้านครั้งต่อวินาที<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เมื่อผู้ใช้คลิก "Save" CU จะรับคำสั่ง แปลความหมาย แล้วสั่งให้ทั้ง ALU, Memory และ Storage ทำงานร่วมกันเพื่อบันทึกไฟล์ลงดิสก์
+              </div>
+            </div>
+
+            <!-- ALU -->
+            <div class="glass-card device-card reveal delay-4">
+              <div class="device-icon-wrap">🧮</div>
+              <div class="device-name">ALU</div>
+              <div class="device-role">Arithmetic Logic Unit — หน่วยคำนวณและตรรกศาสตร์</div>
+              <div class="device-desc">
+                ALU เป็นส่วนของ CPU ที่ทำการคำนวณทางคณิตศาสตร์ (บวก ลบ คูณ หาร) และการดำเนินการทางตรรกศาสตร์ (AND, OR, NOT, XOR) รวมถึงการเปรียบเทียบค่า ซึ่งเป็นพื้นฐานของทุกการประมวลผล
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หน้าที่:</strong> ALU รับตัวเลข 2 ตัวจาก Register และ Opcode ที่บอกว่าจะทำอะไร เช่น Add, Subtract, Compare แล้วส่งผลลัพธ์กลับไป รองรับทั้งเลขจำนวนเต็มและทศนิยม (Floating Point)<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เมื่อโปรแกรมคำนวณ 100 + 200, CU ส่งคำสั่ง ADD พร้อมค่า 100 และ 200 ให้ ALU ทำการบวก แล้วรับผลลัพธ์ 300 กลับมาเก็บใน Register เพื่อใช้ต่อ
+              </div>
+            </div>
+
+            <!-- Cache -->
+            <div class="glass-card device-card reveal delay-5">
+              <div class="device-icon-wrap">⚡</div>
+              <div class="device-name">Cache Memory</div>
+              <div class="device-role">หน่วยความจำแคช</div>
+              <div class="device-desc">
+                Cache เป็นหน่วยความจำความเร็วสูงสุดในระบบ อยู่ภายใน CPU เก็บข้อมูลและคำสั่งที่ CPU ใช้บ่อยเอาไว้ชั่วคราว ทำให้ไม่ต้องเสียเวลาเข้าถึง RAM ทุกครั้ง แบ่งเป็น L1, L2, L3 ตามลำดับความเร็ว
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ลำดับ Cache:</strong> L1 เล็กที่สุด (~32 KB) แต่เร็วที่สุด, L2 (~256 KB–1 MB), L3 ใหญ่ที่สุด (~8–32 MB) แต่ช้ากว่า L1 ยังไงก็เร็วกว่า RAM มาก โดย Cache L1 เข้าถึงข้อมูลได้ใน ~1–4 Clock Cycle<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เมื่อเปิดเกมครั้งแรก CPU โหลดข้อมูลจาก RAM เข้า Cache ครั้งถัดไปที่ต้องการข้อมูลชุดเดิม CPU เข้าถึงจาก Cache ได้ทันทีโดยไม่ต้องรอ RAM ทำให้เกมไหลลื่น
+              </div>
+            </div>
+
+            <!-- Motherboard -->
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🖥️</div>
+              <div class="device-name">Motherboard</div>
+              <div class="device-role">เมนบอร์ด — แผงวงจรหลัก</div>
+              <div class="device-desc">
+                เมนบอร์ดเป็นแผงวงจรอิเล็กทรอนิกส์หลักที่เชื่อมต่อส่วนประกอบทั้งหมดของคอมพิวเตอร์ไว้ด้วยกัน ทั้ง CPU, RAM, GPU, Storage และ I/O Ports สื่อสารกันผ่าน Bus บนเมนบอร์ด
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ส่วนประกอบ:</strong> Socket CPU, Slot RAM (DIMM), Slot PCIe สำหรับ GPU, Port SATA และ M.2 สำหรับ Storage, Chip Chipset ควบคุม I/O, BIOS/UEFI ROM และพอร์ต USB, HDMI, Audio<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เมนบอร์ด ASUS ROG, MSI MAG เป็นตัวกลางที่ทำให้ CPU Intel i9 สามารถสื่อสารกับ RAM DDR5, SSD NVMe, GPU NVIDIA และการ์ดเสียงได้พร้อมกัน
+              </div>
+            </div>
+
+          </div>
+        </div><!-- end processing -->
+
+        <!-- 1.3 MAIN MEMORY -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">🧠 1.3 หน่วยความจำหลัก (Main Memory)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            หน่วยความจำหลักทำหน้าที่เก็บข้อมูลและโปรแกรมที่กำลังทำงานอยู่ในขณะนั้น ช่วยให้ CPU เข้าถึงข้อมูลได้รวดเร็ว มี 2 ประเภทหลักคือ RAM และ ROM ซึ่งมีคุณสมบัติแตกต่างกันชัดเจน
+          </p>
+
+          <div class="proc-grid" style="margin-bottom:32px;">
+
+            <!-- RAM -->
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">💡</div>
+              <div class="device-name">RAM</div>
+              <div class="device-role">Random Access Memory — หน่วยความจำเข้าถึงสุ่ม</div>
+              <div class="device-desc">
+                RAM คือหน่วยความจำหลักที่ใช้เก็บข้อมูลและโปรแกรมที่ CPU กำลังทำงานอยู่ในขณะนั้น เป็น Volatile Memory หมายความว่าข้อมูลจะหายไปทันทีเมื่อปิดเครื่อง ยิ่งมี RAM มาก ยิ่งเปิดโปรแกรมพร้อมกันได้มาก
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ประเภท:</strong> DDR4 และ DDR5 เป็น RAM ยุคปัจจุบัน DDR5 เร็วและประหยัดพลังงานกว่า ความจุทั่วไปคือ 8–64 GB ความเร็ว 3200–6400 MHz<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เปิด Chrome 20 แท็บ + VS Code + Zoom พร้อมกัน ต้องใช้ RAM อย่างน้อย 16 GB มิฉะนั้นระบบจะช้าเพราะต้องใช้ Virtual Memory บน Disk แทน
+              </div>
+            </div>
+
+            <!-- ROM -->
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">🔒</div>
+              <div class="device-name">ROM</div>
+              <div class="device-role">Read-Only Memory — หน่วยความจำอ่านอย่างเดียว</div>
+              <div class="device-desc">
+                ROM เป็นหน่วยความจำถาวร (Non-Volatile) ที่เก็บโปรแกรมพื้นฐานของระบบ เช่น BIOS/UEFI ข้อมูลใน ROM ไม่สูญหายเมื่อปิดเครื่อง และโดยปกติผู้ใช้จะไม่สามารถแก้ไขได้ในระหว่างการใช้งานปกติ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ประเภท:</strong> PROM (เขียนได้ครั้งเดียว), EPROM (ลบได้ด้วยแสง UV), EEPROM (ลบได้ด้วยสัญญาณไฟฟ้า), Flash ROM (ปัจจุบันใช้ใน BIOS/UEFI)<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> เมื่อเปิดคอมพิวเตอร์ BIOS ใน ROM จะตรวจสอบฮาร์ดแวร์ (POST) และบูตระบบปฏิบัติการขึ้นมาก่อนเสมอ โดยไม่ต้องพึ่ง RAM
+              </div>
+            </div>
+
+            <!-- Virtual Memory -->
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🔄</div>
+              <div class="device-name">Virtual Memory</div>
+              <div class="device-role">หน่วยความจำเสมือน</div>
+              <div class="device-desc">
+                Virtual Memory คือเทคนิคที่ระบบปฏิบัติการใช้พื้นที่บน Hard Disk หรือ SSD มาทำงานแทน RAM เมื่อ RAM ไม่เพียงพอ ทำให้ระบบยังทำงานต่อได้ แต่จะช้ากว่า RAM จริงมาก
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">หลักการ:</strong> OS สร้างไฟล์ Paging (pagefile.sys บน Windows หรือ Swap บน Linux) บน Disk ข้อมูลที่ไม่ได้ใช้บ่อยจะถูก "Swap Out" ไปเก็บใน Disk และโหลดกลับเข้า RAM เมื่อต้องการ<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> คอมพิวเตอร์ RAM 4 GB เปิดโปรแกรมหนักหลายตัว Windows จะใช้ Paging File บน SSD เป็น Virtual Memory เพิ่มเติม แต่จะรู้สึกช้าลงอย่างเห็นได้ชัด
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Memory Comparison Table -->
+          <div class="table-wrap reveal">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>ประเภท</th>
+                  <th>ความเร็ว</th>
+                  <th>ความจุทั่วไป</th>
+                  <th>ถาวร/ชั่วคราว</th>
+                  <th>หน้าที่</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-name">Cache (L1)</td>
+                  <td><span class="badge badge-fast">เร็วมาก</span></td>
+                  <td>32–64 KB</td>
+                  <td><span class="badge badge-vol">ชั่วคราว</span></td>
+                  <td>เก็บข้อมูลที่ CPU ใช้บ่อยที่สุด</td>
+                </tr>
+                <tr>
+                  <td class="td-name">Cache (L3)</td>
+                  <td><span class="badge badge-fast">เร็วมาก</span></td>
+                  <td>8–32 MB</td>
+                  <td><span class="badge badge-vol">ชั่วคราว</span></td>
+                  <td>บัฟเฟอร์ระหว่าง CPU กับ RAM</td>
+                </tr>
+                <tr>
+                  <td class="td-name">RAM (DDR5)</td>
+                  <td><span class="badge badge-medium">ปานกลาง</span></td>
+                  <td>8–64 GB</td>
+                  <td><span class="badge badge-vol">ชั่วคราว</span></td>
+                  <td>เก็บโปรแกรมที่กำลังทำงาน</td>
+                </tr>
+                <tr>
+                  <td class="td-name">ROM (BIOS)</td>
+                  <td><span class="badge badge-medium">ปานกลาง</span></td>
+                  <td>16–128 MB</td>
+                  <td><span class="badge badge-nvol">ถาวร</span></td>
+                  <td>เก็บ Firmware บูตระบบ</td>
+                </tr>
+                <tr>
+                  <td class="td-name">Virtual Memory</td>
+                  <td><span class="badge badge-slow">ช้า</span></td>
+                  <td>แล้วแต่ Disk</td>
+                  <td><span class="badge badge-vol">ชั่วคราว</span></td>
+                  <td>ขยาย RAM เมื่อไม่เพียงพอ</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- end main memory -->
+
+        <!-- 1.4 SECONDARY STORAGE -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">💽 1.4 อุปกรณ์จัดเก็บข้อมูล (Secondary Storage)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            อุปกรณ์จัดเก็บข้อมูลสำรองทำหน้าที่เก็บข้อมูลอย่างถาวร ข้อมูลจะยังคงอยู่แม้จะปิดเครื่อง แตกต่างจาก RAM ที่ข้อมูลหายเมื่อหยุดจ่ายไฟ ปัจจุบันมีหลายรูปแบบที่แตกต่างกันในด้านความเร็ว ความจุ และราคา
+          </p>
+          <div class="device-grid">
+
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">💿</div>
+              <div class="device-name">HDD</div>
+              <div class="device-role">Hard Disk Drive — ฮาร์ดดิสก์</div>
+              <div class="device-desc">
+                HDD ใช้จานแม่เหล็กหมุนเก็บข้อมูล มีหัวอ่าน/เขียนที่เคลื่อนที่ข้ามจาน ความจุสูงสุดถึง 20 TB ราคาถูกต่อ GB แต่ช้ากว่า SSD มากเนื่องจากมีชิ้นส่วนเคลื่อนไหวทางกลไก
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ข้อดี:</strong> ราคาถูก ความจุสูง เหมาะเก็บไฟล์ขนาดใหญ่ เช่น ภาพยนตร์ เพลง White space ขนาดใหญ่<br/><br/>
+                <strong style="color:var(--cyan-neon);">ข้อเสีย:</strong> ช้ากว่า SSD ประมาณ 5–10 เท่า เสียหายได้ง่ายจากการกระแทก เนื่องจากหัวอ่านลอยอยู่เหนือจานแค่นาโนเมตร<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Seagate Barracuda 2TB, WD Blue ราคาประมาณ 1,500 บาท ต่อ 2TB เหมาะสำหรับ NAS เก็บข้อมูล
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">⚡</div>
+              <div class="device-name">SSD</div>
+              <div class="device-role">Solid State Drive — เอสเอสดี</div>
+              <div class="device-desc">
+                SSD ใช้ชิป Flash Memory เก็บข้อมูล ไม่มีชิ้นส่วนเคลื่อนไหว ทำให้เร็วกว่า HDD 5–20 เท่า ทนทานต่อการกระแทก เงียบ และประหยัดพลังงาน ปัจจุบัน SSD แบบ NVMe ผ่าน PCIe เร็วกว่า SATA SSD อีก 5 เท่า
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ประเภท:</strong> SATA SSD (อ่าน ~550 MB/s), NVMe M.2 (อ่าน ~3,500–7,000 MB/s), PCIe 5.0 NVMe รุ่นใหม่สุดเร็วถึง 12,000 MB/s<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Samsung 990 Pro 1TB NVMe เป็น SSD ยอดนิยม บูต Windows ใน 10–15 วินาที เปิดโปรแกรมได้ทันที เหมาะเป็น System Drive สำหรับนักเรียนและมืออาชีพ
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🔌</div>
+              <div class="device-name">USB Flash Drive</div>
+              <div class="device-role">แฟลชไดรว์ / Thumb Drive</div>
+              <div class="device-desc">
+                แฟลชไดรว์เป็นอุปกรณ์เก็บข้อมูลแบบพกพาขนาดเล็กที่ใช้ Flash Memory เชื่อมต่อผ่าน USB ใช้งานง่าย ไม่ต้องติดตั้งไดรเวอร์ รองรับการเสียบและถอด (Plug and Play) ความจุ 4 GB ถึง 1 TB
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ข้อดี:</strong> พกพาสะดวก ราคาถูก ใช้ได้กับอุปกรณ์ทุกชนิดที่มี USB Port ทนทาน ใช้ได้ทั้ง Windows/Mac/Linux<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> นักเรียนใช้แฟลชไดรว์ส่งงาน โอนไฟล์นำเสนอ USB 3.2 Gen 2 ความเร็วสูงถึง 10 Gbps เหมาะโอนไฟล์ขนาดใหญ่ SanDisk, Kingston เป็นยี่ห้อที่นิยม
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-4">
+              <div class="device-icon-wrap">🗂️</div>
+              <div class="device-name">Memory Card</div>
+              <div class="device-role">เมมโมรี่การ์ด</div>
+              <div class="device-desc">
+                Memory Card เป็น Flash Memory ขนาดเล็กในรูปแบบการ์ด ใช้ใน กล้องถ่ายภาพ สมาร์ทโฟน โดรน เครื่องเล่นเกม มาตรฐาน SD ที่นิยมได้แก่ SD, microSD, SDXC, CFexpress สำหรับมืออาชีพ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">คลาสความเร็ว:</strong> Class 10 (10 MB/s ขึ้นไป), UHS-I (104 MB/s), UHS-II (312 MB/s), V90 (90 MB/s เขียน) เหมาะกับวิดีโอ 4K/8K<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Samsung Pro Plus microSD 256GB เหมาะสำหรับ Nintendo Switch เก็บเกมและถ่ายวิดีโอ 4K บนกล้อง Sony A7 ได้ต่อเนื่อง
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-5">
+              <div class="device-icon-wrap">☁️</div>
+              <div class="device-name">Cloud Storage</div>
+              <div class="device-role">ที่เก็บข้อมูลบนคลาวด์</div>
+              <div class="device-desc">
+                Cloud Storage เก็บข้อมูลบน Server ของผู้ให้บริการที่เชื่อมต่อผ่านอินเทอร์เน็ต เข้าถึงได้จากทุกที่ทุกเวลาผ่านทุกอุปกรณ์ ปลอดภัยจากภัยพิบัติ มีระบบสำรองข้อมูลอัตโนมัติ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่างบริการ:</strong> Google Drive (15 GB ฟรี), OneDrive (5 GB ฟรี), iCloud, Dropbox, MEGA (20 GB ฟรี) มีทั้งแผนฟรีและแบบชำระเงิน<br/><br/>
+                <strong style="color:var(--cyan-neon);">การใช้งาน:</strong> นักเรียนบันทึกรายงานบน Google Drive แชร์ให้เพื่อนร่วมแก้ไขพร้อมกันแบบ Real-time, ธุรกิจสำรองข้อมูลสำคัญ, Photographer อัปโหลดรูปจากกล้องสู่ Adobe Lightroom
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🔋</div>
+              <div class="device-name">External HDD</div>
+              <div class="device-role">ฮาร์ดดิสก์ภายนอก</div>
+              <div class="device-desc">
+                External HDD คือฮาร์ดดิสก์ที่บรรจุในกล่องพกพาเชื่อมต่อด้วย USB เป็นอุปกรณ์สำรองข้อมูลและพกพาข้อมูลจำนวนมาก ความจุสูงถึง 20 TB ราคาไม่แพง เหมาะสำรองข้อมูลสำคัญ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> WD My Passport 2TB, Seagate Backup Plus เหมาะสำรองระบบด้วย Windows Backup หรือ Time Machine บน Mac ตามกฎ 3-2-1 Backup<br/><br/>
+                <strong style="color:var(--cyan-neon);">ข้อควรระวัง:</strong> ต้องป้องกันการกระแทก เพราะมีจานแม่เหล็กหมุนอยู่ภายใน ปัจจุบัน External SSD เช่น Samsung T7 ทนทานกว่าและเร็วกว่า แต่ราคาสูงกว่า
+              </div>
+            </div>
+
+          </div>
+        </div><!-- end storage -->
+
+        <!-- 1.5 OUTPUT DEVICES -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">📤 1.5 อุปกรณ์แสดงผล (Output Devices)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            อุปกรณ์แสดงผลทำหน้าที่นำข้อมูลที่คอมพิวเตอร์ประมวลผลเสร็จแล้วออกมาให้ผู้ใช้รับรู้ได้ ทั้งในรูปแบบภาพ เสียง ข้อความ หรือสิ่งพิมพ์
+          </p>
+          <div class="device-grid">
+
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🖥️</div>
+              <div class="device-name">Monitor</div>
+              <div class="device-role">จอภาพ / จอมอนิเตอร์</div>
+              <div class="device-desc">
+                จอมอนิเตอร์เป็น Output Device หลักที่แสดงผลในรูปภาพและข้อความ ประเภทปัจจุบันได้แก่ IPS, VA, OLED มีความละเอียด FHD, QHD, 4K และอัตราการรีเฟรช 60–360 Hz สำหรับเกมเมอร์
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">เทคโนโลยีหลัก:</strong> IPS (สีสวย มุมมองกว้าง), VA (คอนทราสต์สูง), OLED (ดำจริง สีสด แต่ burn-in), Mini-LED สำหรับ HDR คุณภาพสูง<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> นักออกแบบใช้ DELL U2723D 4K IPS เพื่อความแม่นยำสี นักเล่นเกมใช้ ASUS ROG Swift 360 Hz เพื่อ Response Time ต่ำ
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">🖨️</div>
+              <div class="device-name">Printer</div>
+              <div class="device-role">เครื่องพิมพ์</div>
+              <div class="device-desc">
+                Printer แปลงไฟล์ดิจิทัลเป็นสิ่งพิมพ์บนกระดาษหรือวัสดุอื่น ๆ มีทั้งแบบ Inkjet ที่ราคาถูกใช้หมึก, Laser ที่เร็วและคมชัดสำหรับเอกสาร, และ 3D Printer ที่พิมพ์วัตถุสามมิติ
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ประเภท:</strong> Inkjet (Epson, Canon) เหมาะพิมพ์รูป, Laser (HP, Brother) เหมาะพิมพ์เอกสารปริมาณมาก, Thermal ใช้ใบเสร็จ, 3D Printer (FDM, Resin) สร้างชิ้นงาน 3 มิติ<br/><br/>
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> โรงเรียนใช้ Laser Printer พิมพ์ข้อสอบ, นักออกแบบใช้ Inkjet พิมพ์รูปคุณภาพสูง, วิศวกรใช้ 3D Printer สร้าง Prototype ชิ้นงาน
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🔊</div>
+              <div class="device-name">Speaker</div>
+              <div class="device-role">ลำโพง</div>
+              <div class="device-desc">
+                ลำโพงแปลงสัญญาณไฟฟ้าเป็นคลื่นเสียงที่หูมนุษย์ได้ยิน การ์ดเสียงในคอมพิวเตอร์ส่งสัญญาณ Analog ไปขับ Driver ในลำโพงสร้างการสั่นสะเทือนในอากาศ ความถี่ 20 Hz–20 kHz
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Logitech Z623 ลำโพง 2.1 เหมาะเกมและหนัง, Edifier ลำโพง Studio Monitor เหมาะ Home Studio, JBL, Harman สำหรับดนตรีคุณภาพ<br/><br/>
+                <strong style="color:var(--cyan-neon);">ระบบ Surround:</strong> 2.0 (สเตอริโอ), 2.1 (ซ้าย-ขวา+ซับ), 5.1 (โฮมเธียเตอร์), 7.1.4 (Dolby Atmos) สำหรับประสบการณ์เสียงรอบทิศทาง
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-4">
+              <div class="device-icon-wrap">📽️</div>
+              <div class="device-name">Projector</div>
+              <div class="device-role">โปรเจกเตอร์</div>
+              <div class="device-desc">
+                โปรเจกเตอร์ฉายภาพจากคอมพิวเตอร์ขึ้นบนผนังหรือจอรับภาพขนาดใหญ่ เหมาะสำหรับห้องเรียน ห้องประชุม และโรงภาพยนตร์ เทคโนโลยี DLP และ LCD ให้ภาพสว่างคมชัด
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Epson EB-X51 ใช้ในห้องเรียน, BenQ FullHD สำหรับโฮมเธียเตอร์, NEC PA804UL เลเซอร์ 8,000 lumens ใช้ในหอประชุมใหญ่<br/><br/>
+                <strong style="color:var(--cyan-neon);">เทคโนโลยี:</strong> Laser Projector ไม่ต้องเปลี่ยนหลอด อายุการใช้งาน 20,000+ ชั่วโมง Short Throw Projector ฉายจากระยะใกล้เหมาะห้องแคบ
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-5">
+              <div class="device-icon-wrap">📺</div>
+              <div class="device-name">Smart TV</div>
+              <div class="device-role">โทรทัศน์อัจฉริยะ</div>
+              <div class="device-desc">
+                Smart TV คือโทรทัศน์ที่มีระบบปฏิบัติการในตัว เช่น Android TV, webOS, Tizen สามารถรับสัญญาณจากคอมพิวเตอร์ผ่าน HDMI, Miracast, AirPlay และเล่น Netflix, YouTube โดยตรง
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Samsung Neo QLED, LG OLED evo เชื่อมต่อกับคอมพิวเตอร์เพื่อนำเสนองาน เล่นเกม PC บนจอใหญ่ หรือใช้เป็น Second Monitor ในการทำงาน<br/><br/>
+                <strong style="color:var(--cyan-neon);">ข้อดีในการเรียน:</strong> ใช้เป็นจอนำเสนอในห้องเรียน เชื่อมต่อไร้สายจากแท็บเล็ต/โน้ตบุ๊กของครู สร้างประสบการณ์เรียนรู้ที่น่าสนใจ
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🎧</div>
+              <div class="device-name">Headphone</div>
+              <div class="device-role">หูฟัง</div>
+              <div class="device-desc">
+                หูฟังเป็น Output Device เฉพาะบุคคล แปลงสัญญาณไฟฟ้าเป็นเสียงที่ส่งตรงเข้าหู มีทั้งแบบมีสาย (3.5mm, USB-C) และไร้สาย (Bluetooth) พร้อมฟีเจอร์ ANC (Active Noise Cancellation)
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Sony WH-1000XM5, Apple AirPods Pro มี ANC ตัดเสียงรบกวน เหมาะทำงานในที่พลุกพล่าน, Sennheiser HD 800S เหมาะ Audiophile ฟังเพลงคุณภาพสูง<br/><br/>
+                <strong style="color:var(--cyan-neon);">ใน Gaming:</strong> Headset เพื่อเกม เช่น Razer BlackShark มีไมค์ในตัว ระบบ Surround 7.1 ได้ยินทิศทางเสียงในเกม สำคัญมากใน FPS เช่น CS2, Valorant
+              </div>
+            </div>
+
+          </div>
+        </div><!-- end output -->
+
+      </div><!-- end tab-hardware -->
+
+      <!-- ── TAB: SOFTWARE ── -->
+      <div class="tab-content" id="tab-software">
+
+        <div class="glass-card reveal" style="padding:28px;margin-bottom:48px;">
+          <h3 style="font-size:1.1rem;color:var(--cyan-neon);margin-bottom:12px;">💾 ซอฟต์แวร์ (Software) คืออะไร?</h3>
+          <p style="color:var(--text-secondary);line-height:1.8;">
+            ซอฟต์แวร์ (Software) หมายถึง ชุดคำสั่งหรือโปรแกรมที่เขียนขึ้นด้วยภาษาคอมพิวเตอร์ เพื่อสั่งให้ฮาร์ดแวร์ทำงานตามวัตถุประสงค์ที่ต้องการ ซอฟต์แวร์ไม่มีตัวตนที่จับต้องได้ แต่เป็นส่วนที่ขาดไม่ได้ในการทำให้คอมพิวเตอร์มีประโยชน์ แบ่งเป็น 2 ประเภทหลัก คือ ซอฟต์แวร์ระบบ (System Software) ที่ทำงานเป็นพื้นฐานของระบบ และซอฟต์แวร์ประยุกต์ (Application Software) ที่ผู้ใช้ใช้โดยตรงเพื่อวัตถุประสงค์เฉพาะ
+          </p>
+        </div>
+
+        <!-- System Software -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">🔧 2.1 System Software (ซอฟต์แวร์ระบบ)</h3>
+          <div class="proc-grid">
+
+            <div class="glass-card device-card reveal delay-1">
+              <div class="device-icon-wrap">🪟</div>
+              <div class="device-name">Operating System</div>
+              <div class="device-role">ระบบปฏิบัติการ (OS)</div>
+              <div class="device-desc">
+                OS คือซอฟต์แวร์ที่จัดการทรัพยากรฮาร์ดแวร์ทั้งหมด ได้แก่ CPU, RAM, Storage, I/O และควบคุมให้โปรแกรมประยุกต์ทำงานบนระบบได้อย่างราบรื่น OS ทำหน้าที่เป็นตัวกลางระหว่างผู้ใช้กับฮาร์ดแวร์
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง OS:</strong> Windows 11 (PC ทั่วไป), macOS Sonoma (Apple), Ubuntu/Linux (Server/Developer), Android (สมาร์ทโฟน), iOS (iPhone) แต่ละตัวมีจุดเด่นต่างกัน<br/><br/>
+                <strong style="color:var(--cyan-neon);">หน้าที่หลัก:</strong> จัดการไฟล์ (File System), จัดสรร RAM ให้โปรแกรม, ควบคุม Driver, UI (GUI/CLI), รักษาความปลอดภัย, เชื่อมต่อเครือข่าย
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-2">
+              <div class="device-icon-wrap">🔌</div>
+              <div class="device-name">Device Driver</div>
+              <div class="device-role">ไดรเวอร์อุปกรณ์</div>
+              <div class="device-desc">
+                Device Driver คือโปรแกรมขนาดเล็กที่ทำหน้าที่แปลคำสั่งจาก OS ให้อุปกรณ์ฮาร์ดแวร์เข้าใจและทำงานได้ถูกต้อง ทุกอุปกรณ์ที่ต่อเข้าคอมพิวเตอร์ต้องมี Driver ที่เหมาะสม
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> NVIDIA GeForce Driver สำหรับ GPU, Realtek Audio Driver สำหรับเสียง, Driver เครื่องพิมพ์จาก Canon/Epson Windows Update มักอัปเดต Driver อัตโนมัติ<br/><br/>
+                <strong style="color:var(--cyan-neon);">ทำไมสำคัญ:</strong> Driver เก่าหรือผิดรุ่นทำให้อุปกรณ์ทำงานผิดปกติ ช้า หรือ Crash ควรอัปเดต Driver GPU เป็นประจำเพื่อประสิทธิภาพเกมและ AI สูงสุด
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-3">
+              <div class="device-icon-wrap">🛠️</div>
+              <div class="device-name">Utility Program</div>
+              <div class="device-role">โปรแกรมอรรถประโยชน์</div>
+              <div class="device-desc">
+                Utility Program ช่วยดูแลและบำรุงรักษาระบบคอมพิวเตอร์ให้ทำงานได้อย่างมีประสิทธิภาพ เช่น โปรแกรม Defragment ดิสก์ โปรแกรมบีบอัดไฟล์ โปรแกรมสำรองข้อมูล และ Task Manager
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> WinRAR/7-Zip บีบอัดไฟล์, CCleaner ลบไฟล์ขยะ, Disk Cleanup, Task Manager ดู CPU/RAM, HWMonitor วัดอุณหภูมิ, Macrium Reflect สำรองระบบ<br/><br/>
+                <strong style="color:var(--cyan-neon);">ความสำคัญ:</strong> Utility ช่วยให้ระบบทำงานเร็วขึ้น ป้องกันปัญหา ควรรันโปรแกรมทำความสะอาดและสแกนมัลแวร์สม่ำเสมอ
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-4">
+              <div class="device-icon-wrap">💽</div>
+              <div class="device-name">Firmware</div>
+              <div class="device-role">เฟิร์มแวร์</div>
+              <div class="device-desc">
+                Firmware คือซอฟต์แวร์ที่บันทึกถาวรลงในชิปของฮาร์ดแวร์ ควบคุมการทำงานขั้นพื้นฐานที่สุดของอุปกรณ์นั้น เช่น BIOS/UEFI ในเมนบอร์ด Firmware กล้องถ่ายภาพ หรือ Firmware เราเตอร์
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> BIOS/UEFI บูตระบบ, Firmware SSD ปรับปรุงประสิทธิภาพ, Firmware เราเตอร์แก้ช่องโหว่ความปลอดภัย, Firmware กล้อง เพิ่มฟีเจอร์ใหม่<br/><br/>
+                <strong style="color:var(--cyan-neon);">การอัปเดต:</strong> ควรอัปเดต Firmware อุปกรณ์สำคัญเป็นระยะ เพราะผู้ผลิตมักออกแพตช์แก้บัค เพิ่มฟีเจอร์ และปิดช่องโหว่ความปลอดภัย
+              </div>
+            </div>
+
+            <div class="glass-card device-card reveal delay-5">
+              <div class="device-icon-wrap">🛡️</div>
+              <div class="device-name">Antivirus</div>
+              <div class="device-role">โปรแกรมป้องกันไวรัส</div>
+              <div class="device-desc">
+                Antivirus ทำหน้าที่ตรวจจับ ป้องกัน และลบมัลแวร์ทุกประเภท ได้แก่ ไวรัส Trojan Ransomware Spyware และ Phishing ใช้ฐานข้อมูล Signature และ AI วิเคราะห์พฤติกรรมที่น่าสงสัย
+              </div>
+              <button class="read-more-btn">▼ อ่านเพิ่มเติม</button>
+              <div class="read-more-content">
+                <strong style="color:var(--cyan-neon);">ตัวอย่าง:</strong> Windows Defender (ฟรีใน Windows), Kaspersky, Bitdefender, Malwarebytes ควรมี Antivirus ที่ดีและอัปเดต Definition ทุกวัน<br/><br/>
+                <strong style="color:var(--cyan-neon);">ภัยคุกคามสมัยใหม่:</strong> Ransomware เข้ารหัสไฟล์เรียกค่าไถ่, Phishing หลอกกรอกรหัสผ่าน, Keylogger บันทึกการพิมพ์ ควรใช้ทั้ง Antivirus และ VPN เพื่อความปลอดภัยสูงสุด
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Application Software -->
+        <div class="hw-subsection">
+          <h3 class="hw-subsection-title">📱 2.2 Application Software (ซอฟต์แวร์ประยุกต์)</h3>
+          <p style="color:var(--text-secondary);margin-bottom:28px;line-height:1.8;">
+            ซอฟต์แวร์ประยุกต์คือโปรแกรมที่ออกแบบมาเพื่อตอบสนองความต้องการเฉพาะของผู้ใช้ในด้านต่าง ๆ ไม่ว่าจะเป็นการทำงาน การศึกษา ความบันเทิง หรือการสื่อสาร
+          </p>
+
+          <!-- Office -->
+          <div class="sw-category">
+            <div class="sw-category-header">
+              <span class="sw-cat-title">📄 โปรแกรมสำนักงาน (Office Suite)</span>
+              <span class="sw-cat-arrow">▼</span>
+            </div>
+            <div class="sw-category-body">
+              <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">โปรแกรมสำนักงานช่วยในการสร้าง แก้ไข และจัดการเอกสารทุกประเภท ทั้งรายงาน สเปรดชีต งานนำเสนอ และฐานข้อมูล ใช้กันแพร่หลายทั้งในธุรกิจและการศึกษา</p>
+              <div class="app-grid">
+                <div class="glass-card app-card"><div class="app-icon">📝</div><div class="app-name">Microsoft Word</div><div class="app-role">พิมพ์เอกสาร รายงาน</div></div>
+                <div class="glass-card app-card"><div class="app-icon">📊</div><div class="app-name">Excel</div><div class="app-role">สเปรดชีต คำนวณ</div></div>
+                <div class="glass-card app-card"><div class="app-icon">📑</div><div class="app-name">PowerPoint</div><div class="app-role">งานนำเสนอ Slide</div></div>
+                <div class="glass-card app-card"><div class="app-icon">📃</div><div class="app-name">Google Docs</div><div class="app-role">เอกสารออนไลน์</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🎨</div><div class="app-name">Canva</div><div class="app-role">ออกแบบกราฟิก</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Design -->
+          <div class="sw-category">
+            <div class="sw-category-header">
+              <span class="sw-cat-title">🎨 โปรแกรมออกแบบ (Design Software)</span>
+              <span class="sw-cat-arrow">▼</span>
+            </div>
+            <div class="sw-category-body">
+              <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">โปรแกรมออกแบบใช้สำหรับสร้างสรรค์งานภาพ กราฟิก โมเดล 3 มิติ และ UI/UX ปัจจุบันเป็นทักษะที่ตลาดงานต้องการสูงในหลายวงการ</p>
+              <div class="app-grid">
+                <div class="glass-card app-card"><div class="app-icon">🖼️</div><div class="app-name">Photoshop</div><div class="app-role">ตกแต่งรูปภาพ</div></div>
+                <div class="glass-card app-card"><div class="app-icon">✏️</div><div class="app-name">Illustrator</div><div class="app-role">กราฟิกเวกเตอร์</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🎯</div><div class="app-name">Figma</div><div class="app-role">UI/UX Design</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🧊</div><div class="app-name">Blender</div><div class="app-role">3D Modeling</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🏠</div><div class="app-name">SketchUp</div><div class="app-role">สถาปัตยกรรม 3D</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Browser -->
+          <div class="sw-category">
+            <div class="sw-category-header">
+              <span class="sw-cat-title">🌐 เว็บเบราว์เซอร์ (Web Browser)</span>
+              <span class="sw-cat-arrow">▼</span>
+            </div>
+            <div class="sw-category-body">
+              <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">เว็บเบราว์เซอร์เป็นโปรแกรมที่ทำหน้าที่แสดงผลเว็บไซต์ โดยรับไฟล์ HTML, CSS, JavaScript จากเซิร์ฟเวอร์ผ่าน HTTP/HTTPS แล้วแสดงผลเป็นหน้าเว็บที่สวยงามให้ผู้ใช้</p>
+              <div class="app-grid">
+                <div class="glass-card app-card"><div class="app-icon">🌐</div><div class="app-name">Chrome</div><div class="app-role">เบราว์เซอร์ยอดนิยม</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🔷</div><div class="app-name">Edge</div><div class="app-role">Microsoft Browser</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🦊</div><div class="app-name">Firefox</div><div class="app-role">Open Source ฟรี</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🧭</div><div class="app-name">Safari</div><div class="app-role">Apple Browser</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🅾️</div><div class="app-name">Opera</div><div class="app-role">VPN ในตัว</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Meeting -->
+          <div class="sw-category">
+            <div class="sw-category-header">
+              <span class="sw-cat-title">🤝 โปรแกรมประชุมออนไลน์ (Online Meeting)</span>
+              <span class="sw-cat-arrow">▼</span>
+            </div>
+            <div class="sw-category-body">
+              <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">โปรแกรมประชุมออนไลน์เชื่อมต่อผู้คนจากทั่วโลกผ่านวิดีโอและเสียงแบบเรียลไทม์ กลายเป็นเครื่องมือสำคัญในยุค Remote Work และการเรียนออนไลน์</p>
+              <div class="app-grid">
+                <div class="glass-card app-card"><div class="app-icon">📹</div><div class="app-name">Zoom</div><div class="app-role">ประชุม เรียนออนไลน์</div></div>
+                <div class="glass-card app-card"><div class="app-icon">💼</div><div class="app-name">Microsoft Teams</div><div class="app-role">ทีมงานองค์กร</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🎯</div><div class="app-name">Google Meet</div><div class="app-role">ประชุมฟรีใน Google</div></div>
+                <div class="glass-card app-card"><div class="app-icon">💚</div><div class="app-name">LINE</div><div class="app-role">สื่อสาร วิดีโอคอล</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🎮</div><div class="app-name">Discord</div><div class="app-role">Chat + Voice + Video</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Programs -->
+          <div class="sw-category">
+            <div class="sw-category-header">
+              <span class="sw-cat-title">🤖 โปรแกรม AI (Artificial Intelligence)</span>
+              <span class="sw-cat-arrow">▼</span>
+            </div>
+            <div class="sw-category-body">
+              <p style="color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">โปรแกรม AI ยุคใหม่ใช้ Large Language Model (LLM) ที่เรียนรู้จากข้อมูลจำนวนมหาศาล สามารถตอบคำถาม เขียนโค้ด วิเคราะห์ข้อมูล และช่วยงานสร้างสรรค์ได้อย่างน่าทึ่ง</p>
+              <div class="app-grid">
+                <div class="glass-card app-card"><div class="app-icon">🤖</div><div class="app-name">ChatGPT</div><div class="app-role">OpenAI GPT-4o</div></div>
+                <div class="glass-card app-card"><div class="app-icon">✨</div><div class="app-name">Gemini</div><div class="app-role">Google DeepMind AI</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🧠</div><div class="app-name">Claude</div><div class="app-role">Anthropic AI</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🪟</div><div class="app-name">Microsoft Copilot</div><div class="app-role">AI ใน Office 365</div></div>
+                <div class="glass-card app-card"><div class="app-icon">🔍</div><div class="app-name">Perplexity</div><div class="app-role">AI Search Engine</div></div>
+              </div>
+              <div class="info-box" style="margin-top:20px;">
+                <div class="info-box-title">💡 ประโยชน์ของ AI สำหรับนักเรียน</div>
+                <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;">
+                  AI ช่วยอธิบายบทเรียนที่ยาก, ตรวจไวยากรณ์ภาษาอังกฤษ, เขียนโค้ดโปรแกรม, สรุปบทความ, แปลภาษา และตอบคำถามได้ทุกเรื่อง อย่างไรก็ตามควรตรวจสอบความถูกต้องของข้อมูลที่ AI ให้เสมอ และใช้เป็นเครื่องมือช่วย ไม่ใช่ทำแทนทุกอย่าง
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end app software -->
+
+      </div><!-- end tab-software -->
+
+    </div><!-- end section-inner -->
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 2: HOW IT WORKS (IPO)
+  ══════════════════════════════════════════════════════════ -->
+  <section id="how-it-works" class="section-full">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">ส่วนที่ 2</span>
+        <h2 class="section-title">หลักการทำงานของคอมพิวเตอร์</h2>
+        <p class="section-desc">คอมพิวเตอร์ทำงานตามวงจร Input → Process → Memory → Storage → Output กดที่แต่ละขั้นตอนเพื่อดูรายละเอียด</p>
+        <div class="section-divider"></div>
+      </header>
+
+      <div class="flow-container">
+
+        <!-- Step 1: Input -->
+        <div class="flow-step reveal">
+          <div class="flow-step-left">
+            <div class="flow-node" data-step="1">📥</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-step-right">
+            <div class="flow-step-title">① INPUT — รับข้อมูลเข้า</div>
+            <div class="flow-step-desc">ผู้ใช้ป้อนข้อมูลหรือคำสั่งผ่านอุปกรณ์ Input เช่น แป้นพิมพ์ เมาส์ ไมโครโฟน กล้อง หรือหน้าจอสัมผัส ข้อมูลจะถูกแปลงเป็นสัญญาณดิจิทัล (0 และ 1) เพื่อส่งต่อให้ CPU ประมวลผล</div>
+            <div class="flow-detail-panel" id="panel-1">
+              <h4 style="color:var(--cyan-neon);margin-bottom:10px;">🔍 ตัวอย่างการรับข้อมูล</h4>
+              <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:2;padding-left:20px;list-style:disc;">
+                <li>พิมพ์งาน: กดแป้นพิมพ์ → สัญญาณ ASCII → ส่งผ่าน USB → CPU</li>
+                <li>เล่นเกม: กดปุ่ม Controller → สัญญาณ Bluetooth → CPU ประมวลผลตำแหน่งตัวละคร</li>
+                <li>เปิดเว็บ: พิมพ์ URL → ส่งผ่าน Network Card → DNS Lookup → เชื่อมต่อ Server</li>
+                <li>ดูวิดีโอ: คลิก Play → ส่งคำสั่งไป Media Player → อ่านไฟล์จาก Storage</li>
+              </ul>
+              <div class="flow-examples">
+                <span class="flow-example-tag">⌨️ แป้นพิมพ์</span>
+                <span class="flow-example-tag">🖱️ เมาส์</span>
+                <span class="flow-example-tag">🎤 เสียง</span>
+                <span class="flow-example-tag">📷 กล้อง</span>
+                <span class="flow-example-tag">📱 สัมผัส</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Process -->
+        <div class="flow-step reveal">
+          <div class="flow-step-left">
+            <div class="flow-node" data-step="2">⚙️</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-step-right">
+            <div class="flow-step-title">② PROCESS — ประมวลผล</div>
+            <div class="flow-step-desc">CPU รับข้อมูลจาก Input และ Memory มาประมวลผลตามคำสั่งของโปรแกรม โดยผ่านวงจร Fetch → Decode → Execute ซ้ำหลายพันล้านครั้งต่อวินาที CU ควบคุม ALU คำนวณ และ Cache เก็บข้อมูลชั่วคราว</div>
+            <div class="flow-detail-panel" id="panel-2">
+              <h4 style="color:var(--cyan-neon);margin-bottom:10px;">⚙️ วงจรการประมวลผล (Fetch-Decode-Execute)</h4>
+              <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;">
+                <div style="flex:1;min-width:160px;padding:12px;background:rgba(59,130,246,0.1);border-radius:10px;border:1px solid rgba(59,130,246,0.2);">
+                  <div style="color:var(--blue-bright);font-weight:700;margin-bottom:6px;">① FETCH</div>
+                  <div style="color:var(--text-secondary);font-size:0.85rem;">CU ดึงคำสั่งถัดไปจาก RAM ผ่าน Memory Bus เก็บใน Instruction Register</div>
+                </div>
+                <div style="flex:1;min-width:160px;padding:12px;background:rgba(124,58,237,0.1);border-radius:10px;border:1px solid rgba(124,58,237,0.2);">
+                  <div style="color:var(--purple-bright);font-weight:700;margin-bottom:6px;">② DECODE</div>
+                  <div style="color:var(--text-secondary);font-size:0.85rem;">CU ถอดรหัสคำสั่ง แปลง Opcode ว่าจะให้ทำอะไร กับข้อมูลใด</div>
+                </div>
+                <div style="flex:1;min-width:160px;padding:12px;background:rgba(0,245,255,0.08);border-radius:10px;border:1px solid rgba(0,245,255,0.2);">
+                  <div style="color:var(--cyan-neon);font-weight:700;margin-bottom:6px;">③ EXECUTE</div>
+                  <div style="color:var(--text-secondary);font-size:0.85rem;">ALU หรือหน่วยอื่นดำเนินการคำสั่ง เก็บผลลัพธ์ใน Register</div>
+                </div>
+              </div>
+              <div class="flow-examples">
+                <span class="flow-example-tag">🔲 CPU Core</span>
+                <span class="flow-example-tag">🧮 ALU</span>
+                <span class="flow-example-tag">🎛️ Control Unit</span>
+                <span class="flow-example-tag">⚡ Cache L1/L2/L3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Memory -->
+        <div class="flow-step reveal">
+          <div class="flow-step-left">
+            <div class="flow-node" data-step="3">💡</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-step-right">
+            <div class="flow-step-title">③ MAIN MEMORY — หน่วยความจำหลัก</div>
+            <div class="flow-step-desc">ขณะที่โปรแกรมทำงาน CPU จะโหลดข้อมูลและคำสั่งที่จำเป็นจาก Storage เข้าสู่ RAM เพื่อให้เข้าถึงได้รวดเร็ว RAM ทำหน้าที่เป็น "โต๊ะทำงาน" ชั่วคราวของ CPU ยิ่งมี RAM มาก ยิ่งเปิดโปรแกรมพร้อมกันได้มาก</div>
+            <div class="flow-detail-panel" id="panel-3">
+              <h4 style="color:var(--cyan-neon);margin-bottom:10px;">💡 การทำงานของ RAM</h4>
+              <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:12px;">เมื่อดับเบิลคลิกไอคอนโปรแกรม OS จะอ่านไฟล์จาก SSD/HDD แล้วโหลดเข้า RAM จากนั้น CPU จะอ่านคำสั่งจาก RAM ทีละคำสั่งเพื่อประมวลผล ข้อมูลที่ใช้บ่อยจะถูกคัดลอกขึ้นไปเก็บใน Cache ของ CPU เพื่อความเร็วสูงสุด</p>
+              <div class="flow-examples">
+                <span class="flow-example-tag">💾 RAM DDR5</span>
+                <span class="flow-example-tag">🔒 ROM BIOS</span>
+                <span class="flow-example-tag">⚡ Cache</span>
+                <span class="flow-example-tag">🔄 Virtual Memory</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Storage -->
+        <div class="flow-step reveal">
+          <div class="flow-step-left">
+            <div class="flow-node" data-step="4">💽</div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-step-right">
+            <div class="flow-step-title">④ STORAGE — จัดเก็บข้อมูล</div>
+            <div class="flow-step-desc">เมื่อผู้ใช้สั่ง "บันทึก" ข้อมูลจาก RAM จะถูกเขียนลง Storage (SSD/HDD) เพื่อเก็บอย่างถาวร ข้อมูลใน Storage จะคงอยู่แม้ปิดเครื่อง ในทางกลับกัน เมื่อเปิดไฟล์ OS จะอ่านข้อมูลจาก Storage โหลดขึ้น RAM</div>
+            <div class="flow-detail-panel" id="panel-4">
+              <h4 style="color:var(--cyan-neon);margin-bottom:10px;">💽 วงจรการจัดเก็บ</h4>
+              <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.7;margin-bottom:12px;"><strong style="color:var(--text-primary);">บันทึกไฟล์:</strong> กด Ctrl+S → OS รับคำสั่ง → เขียนข้อมูลจาก RAM ลง SSD → ยืนยันว่าบันทึกสำเร็จ<br/><br/><strong style="color:var(--text-primary);">เปิดไฟล์:</strong> ดับเบิลคลิก → OS อ่านจาก SSD → โหลดเข้า RAM → CPU ประมวลผล → แสดงผลบนหน้าจอ</p>
+              <div class="flow-examples">
+                <span class="flow-example-tag">💿 SSD NVMe</span>
+                <span class="flow-example-tag">🔋 HDD</span>
+                <span class="flow-example-tag">☁️ Cloud</span>
+                <span class="flow-example-tag">🔌 USB Drive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Output -->
+        <div class="flow-step reveal">
+          <div class="flow-step-left">
+            <div class="flow-node" data-step="5">📤</div>
+          </div>
+          <div class="flow-step-right">
+            <div class="flow-step-title">⑤ OUTPUT — แสดงผลลัพธ์</div>
+            <div class="flow-step-desc">ผลลัพธ์จากการประมวลผลจะถูกส่งออกผ่าน Output Device เพื่อให้ผู้ใช้รับรู้ได้ ไม่ว่าจะเป็นภาพบนจอ เสียงจากลำโพง เอกสารจากเครื่องพิมพ์ หรือสัญญาณส่งผ่านเครือข่ายอินเทอร์เน็ต</div>
+            <div class="flow-detail-panel" id="panel-5">
+              <h4 style="color:var(--cyan-neon);margin-bottom:10px;">📤 ตัวอย่าง Output ในชีวิตจริง</h4>
+              <ul style="color:var(--text-secondary);font-size:0.9rem;line-height:2;padding-left:20px;list-style:disc;">
+                <li><strong style="color:var(--text-primary);">พิมพ์งาน:</strong> ตัวอักษรปรากฏบนจอ → กด Print → Printer พิมพ์กระดาษออกมา</li>
+                <li><strong style="color:var(--text-primary);">เล่นเกม:</strong> GPU เรนเดอร์ภาพ → ส่งสัญญาณ HDMI → Monitor แสดง 144 fps</li>
+                <li><strong style="color:var(--text-primary);">ฟังเพลง:</strong> Decode MP3 → Sound Card แปลงเป็น Analog → ลำโพงสร้างเสียง</li>
+                <li><strong style="color:var(--text-primary);">ส่ง Email:</strong> ข้อมูลออกจาก CPU → Network Card → Router → Internet → Server ปลายทาง</li>
+              </ul>
+              <div class="flow-examples">
+                <span class="flow-example-tag">🖥️ Monitor</span>
+                <span class="flow-example-tag">🔊 Speaker</span>
+                <span class="flow-example-tag">🖨️ Printer</span>
+                <span class="flow-example-tag">📡 Network</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end flow-container -->
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 3: SUMMARY TABLE
+  ══════════════════════════════════════════════════════════ -->
+  <section id="summary" class="section-full">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">ส่วนที่ 3</span>
+        <h2 class="section-title">ตารางสรุปองค์ประกอบคอมพิวเตอร์</h2>
+        <p class="section-desc">สรุปหน้าที่และตัวอย่างของแต่ละส่วนประกอบอย่างครบถ้วน</p>
+        <div class="section-divider"></div>
+      </header>
+
+      <div class="summary-table-wrap reveal">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>หมวดหมู่</th>
+              <th>ประเภท</th>
+              <th>หน้าที่หลัก</th>
+              <th>ตัวอย่าง</th>
+              <th>ข้อดีเด่น</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="category-cell">⚙️ Hardware</td>
+              <td><span class="badge badge-fast">Input</span></td>
+              <td>รับข้อมูลและคำสั่งจากผู้ใช้เข้าสู่ระบบ</td>
+              <td><div class="example-list"><span class="example-chip">Keyboard</span><span class="example-chip">Mouse</span><span class="example-chip">Webcam</span></div></td>
+              <td>เชื่อมต่อผู้ใช้กับคอมพิวเตอร์</td>
+            </tr>
+            <tr>
+              <td class="category-cell">⚙️ Hardware</td>
+              <td><span class="badge badge-fast">Process</span></td>
+              <td>ประมวลผลคำสั่งและข้อมูลตามโปรแกรม</td>
+              <td><div class="example-list"><span class="example-chip">CPU</span><span class="example-chip">GPU</span><span class="example-chip">ALU</span><span class="example-chip">CU</span></div></td>
+              <td>ยิ่งเร็ว-มาก Core ยิ่งทรงพลัง</td>
+            </tr>
+            <tr>
+              <td class="category-cell">⚙️ Hardware</td>
+              <td><span class="badge badge-medium">Memory</span></td>
+              <td>เก็บข้อมูล/โปรแกรมที่กำลังทำงานอยู่</td>
+              <td><div class="example-list"><span class="example-chip">RAM</span><span class="example-chip">ROM</span><span class="example-chip">Cache</span></div></td>
+              <td>เข้าถึงเร็ว ทำงานได้หลายอย่างพร้อมกัน</td>
+            </tr>
+            <tr>
+              <td class="category-cell">⚙️ Hardware</td>
+              <td><span class="badge badge-nvol">Storage</span></td>
+              <td>เก็บข้อมูลถาวรเมื่อปิดเครื่อง</td>
+              <td><div class="example-list"><span class="example-chip">SSD</span><span class="example-chip">HDD</span><span class="example-chip">USB</span><span class="example-chip">Cloud</span></div></td>
+              <td>เก็บข้อมูลได้มาก ปลอดภัยถาวร</td>
+            </tr>
+            <tr>
+              <td class="category-cell">⚙️ Hardware</td>
+              <td><span class="badge badge-slow">Output</span></td>
+              <td>แสดงผลลัพธ์ให้ผู้ใช้รับรู้</td>
+              <td><div class="example-list"><span class="example-chip">Monitor</span><span class="example-chip">Speaker</span><span class="example-chip">Printer</span></div></td>
+              <td>สื่อสารผลลัพธ์สู่ผู้ใช้</td>
+            </tr>
+            <tr>
+              <td class="category-cell">💾 Software</td>
+              <td><span class="badge badge-vol">System</span></td>
+              <td>จัดการทรัพยากรฮาร์ดแวร์ ควบคุม OS</td>
+              <td><div class="example-list"><span class="example-chip">Windows</span><span class="example-chip">macOS</span><span class="example-chip">Driver</span></div></td>
+              <td>เป็นพื้นฐานของการทำงานทั้งหมด</td>
+            </tr>
+            <tr>
+              <td class="category-cell">💾 Software</td>
+              <td><span class="badge badge-fast">Application</span></td>
+              <td>ช่วยผู้ใช้ทำงานตามวัตถุประสงค์เฉพาะ</td>
+              <td><div class="example-list"><span class="example-chip">Word</span><span class="example-chip">Photoshop</span><span class="example-chip">Chrome</span><span class="example-chip">ChatGPT</span></div></td>
+              <td>หลากหลาย ใช้งานตรงตามต้องการ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 4: QUIZ
+  ══════════════════════════════════════════════════════════ -->
+  <section id="quiz-section" class="section-full">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">ส่วนที่ 4</span>
+        <h2 class="section-title">แบบทดสอบความเข้าใจ</h2>
+        <p class="section-desc">ทดสอบความรู้เกี่ยวกับหลักการทำงานของคอมพิวเตอร์ 10 ข้อ พร้อมเฉลยและคำอธิบาย</p>
+        <div class="section-divider"></div>
+      </header>
+
+      <div class="quiz-container">
+
+        <!-- Progress -->
+        <div class="quiz-progress-wrap reveal">
+          <div class="quiz-progress-info">
+            <span>ข้อที่ <span id="quiz-current">1</span> จาก <span id="quiz-total">10</span></span>
+            <span id="quiz-score-display">คะแนน: 0/10</span>
+          </div>
+          <div class="quiz-progress-bar-bg">
+            <div class="quiz-progress-bar" id="quiz-progress-bar" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Quiz Card -->
+        <div id="quiz-body">
+          <div class="glass-card quiz-card reveal">
+            <div id="quiz-qnum" class="quiz-qnum">คำถามที่ 1 / 10</div>
+            <div id="quiz-question" class="quiz-question"></div>
+            <div id="quiz-options" class="quiz-options"></div>
+            <div id="quiz-explanation" class="quiz-explanation"></div>
+            <div class="quiz-nav-row">
+              <div></div>
+              <button id="quiz-next" class="btn-primary ripple-btn" style="display:none;">
+                ข้อถัดไป →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="glass-card quiz-result">
+          <div id="result-emoji" class="result-emoji">🏆</div>
+          <div id="result-score" class="result-score">0/10</div>
+          <div id="result-pct" class="result-label">คะแนน 0%</div>
+          <div id="result-grade" class="result-grade grade-a">ยอดเยี่ยม!</div>
+          <p id="result-msg" style="color:var(--text-secondary);margin-bottom:28px;"></p>
+          <button id="quiz-restart" class="btn-primary ripple-btn">
+            🔄 ทำแบบทดสอบใหม่
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-separator"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECTION 5: AUTHOR
+  ══════════════════════════════════════════════════════════ -->
+  <section id="author" class="section-full">
+    <div class="section-inner">
+      <header class="section-header reveal">
+        <span class="section-eyebrow">ผู้จัดทำ</span>
+        <h2 class="section-title">เกี่ยวกับผู้จัดทำ</h2>
+        <div class="section-divider"></div>
+      </header>
+
+      <div class="glass-card author-card reveal">
+        <div class="author-avatar">👤</div>
+        <div class="author-name">ชื่อ-นามสกุล นักเรียน</div>
+        <div class="author-meta">ผู้จัดทำสื่อการเรียนการสอนอิเล็กทรอนิกส์</div>
+
+        <div class="author-info-grid">
+          <div class="author-info-item">
+            <div class="author-info-label">โรงเรียน</div>
+            <div class="author-info-value">โรงเรียน…</div>
+          </div>
+          <div class="author-info-item">
+            <div class="author-info-label">ชั้นเรียน</div>
+            <div class="author-info-value">มัธยมศึกษาปีที่ …</div>
+          </div>
+          <div class="author-info-item">
+            <div class="author-info-label">วิชา</div>
+            <div class="author-info-value">วิทยาการคำนวณ / คอมพิวเตอร์</div>
+          </div>
+          <div class="author-info-item">
+            <div class="author-info-label">ปีการศึกษา</div>
+            <div class="author-info-value">2568</div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:28px;text-align:left;">
+          <div class="info-box-title">📚 วัตถุประสงค์ของสื่อนี้</div>
+          <p style="color:var(--text-secondary);font-size:0.9rem;line-height:1.8;">
+            สื่อการเรียนรู้นี้จัดทำขึ้นเพื่อช่วยให้นักเรียนระดับมัธยมศึกษาเข้าใจหลักการทำงานของคอมพิวเตอร์ ทั้งด้านฮาร์ดแวร์ ซอฟต์แวร์ และวงจร IPO ผ่านการนำเสนอที่ทันสมัย มีปฏิสัมพันธ์ และแบบทดสอบที่ช่วยประเมินความเข้าใจ ขอขอบคุณครูผู้สอนและเพื่อน ๆ ที่ให้ความช่วยเหลือในการจัดทำสื่อนี้
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="footer-brand">💻 หลักการทำงานของคอมพิวเตอร์</div>
+    <p>สื่อการเรียนรู้อิเล็กทรอนิกส์ • วิชาวิทยาการคำนวณ • ปีการศึกษา 2568</p>
+    <p style="margin-top:8px;font-size:0.78rem;">ออกแบบและพัฒนาด้วย HTML5 · CSS3 · JavaScript</p>
+  </footer>
+
+</div><!-- end main-wrapper -->
+
+<!-- Back to Top -->
+<button id="back-top" aria-label="กลับด้านบน" title="กลับด้านบน">↑</button>
+
+<script src="script.js"></script>
+</body>
+</html>
